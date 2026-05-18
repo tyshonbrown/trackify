@@ -1,0 +1,98 @@
+
+
+.start {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;   /* vertical center */
+  align-items: center; 
+  text-align: center;
+  min-height: 100vh;
+  background-color: black;
+  font-family: "Inter", sans-serif;
+}
+
+.start-content {
+  padding: 10px 30px;
+  margin-top: 100px;
+  background-color: blue;
+}
+
+.login-content {
+  padding: 10px 30px;
+  margin-top: 100px;
+  color: black;
+  background-color: white;
+  align-items: center;
+
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between; /* Push items apart */
+  align-items: center;
+  padding: 10px 40px;
+  background-color: rgb(0, 0, 0);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.logo-section {
+  flex: 1; /* take up left space*/
+  display: flex;
+  justify-content: flex-start;
+}
+
+.middle-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  /*flex-direction: row;*/
+  gap: 25px;
+}
+.middle-section button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: clamp(14px, 1.1vw, 18px);
+  cursor: pointer;
+}
+
+.right-section {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo {
+  height: 80px;
+  width: auto;
+  cursor: pointer;
+  object-fit: contain;
+}
+
+button {
+  background: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.7;
+}
+
+.login-btn {
+  background: none;
+  border: none;
+  color: white;
+}
+.signup-btn {
+  border: 1px solid white;
+  border-radius: 6px;
+  padding: 6px 14px;
+}

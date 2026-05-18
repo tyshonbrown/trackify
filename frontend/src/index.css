@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+
+  /* Apply set of classes to the body, so every page starts with the same
+  look and feel. */
+  body {
+    /* h-screen makes body take up full height of browser window */
+    /* overflow hides any horizontal scrolling */
+    @apply bg-black text-white relative font-sans h-screen overflow-x-hidden;
+  }
+
+}
