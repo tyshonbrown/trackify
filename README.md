@@ -30,25 +30,25 @@ Trackify is a full-stack expense tracking web app that helps users manage their 
 ## Screenshots
 
 ### Landing Page
-![Landing Page](./frontend/screenshots/Landing-Page.png)
+![Landing Page](./screenshots/Landing-Page.png)
 
 ### Dashboard
-![Dashboard](./frontend/screenshots/Dashboard.png)
+![Dashboard](./screenshots/Dashboard.png)
 
 ### Expenses
-![Expenses](./frontend/screenshots/Expenses.png)
+![Expenses](./screenshots/Expenses.png)
 
 ### Budgets
-![Budgets](./frontend/screenshots/Budgets.png)
+![Budgets](./screenshots/Budgets.png)
 
 ### Trips
-![Trips](./frontend/screenshots/Trips-Page.png)
+![Trips](./screenshots/Trips-Page.png)
 
 ### Analytics
-![Analytics](./frontend/screenshots/Analytics.png)
+![Analytics](./screenshots/Analytics.png)
 
 ### Account
-![Account](./frontend/screenshots/Account.png)
+![Account](./screenshots/Account.png)
 
 ## Demo
 
@@ -86,12 +86,6 @@ Clone the repository:
 
 ```bash
 git clone https://github.com/tyshonbrown/trackify.git
-```
-
-Go into the frontend folder:
-
-```bash
-cd Trackify/frontend
 ```
 
 Install dependencies:
