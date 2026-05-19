@@ -69,11 +69,10 @@ While building Trackify, I practiced:
 
 ## Future Improvements
 
-- Add recurring expenses
-- Add CSV export for expenses
-- Add more advanced filtering for analytics
+- Improve the mobile dashboard experience with small layout adjustments
+- Add savings features for tracking savings goals and progress
 - Add email reminders for budget limits
-- Improve mobile dashboard layouts
+- Expand analytics with more spending trends and insights
 
 ## Installation
 
