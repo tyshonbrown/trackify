@@ -9,6 +9,7 @@ const EditExtraIncome = ({ extraIncome, onClose, onSave }) => {
         date: "",
     });
 
+    // Setting extra income form with current values
     useEffect(() => {
         if (extraIncome) {
           setForm({
@@ -19,6 +20,7 @@ const EditExtraIncome = ({ extraIncome, onClose, onSave }) => {
         }
       }, [extraIncome]);
 
+    // Updating form on input changes
     const handleChange = (e) => {
         const { name, value } = e.target;
         setForm((prev) => ({
@@ -27,6 +29,7 @@ const EditExtraIncome = ({ extraIncome, onClose, onSave }) => {
         }));
     };
 
+    // Updating Extra income
     const handleUpdate = async () => {
         const { error } = await supabase
             .from("extra_income")
@@ -50,6 +53,7 @@ const EditExtraIncome = ({ extraIncome, onClose, onSave }) => {
         <div className="bg-zinc-900 rounded-lg p-6 w-full max-w-md">
           <h2 className="text-xl mb-4">Edit Extra Income</h2>
   
+          {/* Name */}
           <div className="space-y-4">
             <div>
               <label className="text-sm text-zinc-400">Name</label>
@@ -62,6 +66,7 @@ const EditExtraIncome = ({ extraIncome, onClose, onSave }) => {
               />
             </div>
   
+            {/* Amount */}
             <div>
               <label className="text-sm text-zinc-400">Amount</label>
               <input
@@ -73,6 +78,7 @@ const EditExtraIncome = ({ extraIncome, onClose, onSave }) => {
               />
             </div>
   
+            {/* Date */}
             <div>
               <label className="text-sm text-zinc-400">Date</label>
               <input

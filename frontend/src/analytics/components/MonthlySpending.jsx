@@ -15,6 +15,7 @@ const MonthlySpending = ({ data, year }) => {
     const currentYear = today.getFullYear();
     const currentMonth = today.getMonth();
 
+    // Valid months are those that are not future and have a spending amount
     const validMonths = data.filter((month, index) => {
         const isFutureMonth =
             year === currentYear && index > currentMonth;
@@ -24,20 +25,24 @@ const MonthlySpending = ({ data, year }) => {
         return !isFutureMonth && hasSpending;
     });
 
+    // Check that the year has valid months
     const hasValidMonths = validMonths.length > 0;
 
+    // Highest Spending month
     const highestMonth = hasValidMonths
         ? validMonths.reduce((highest, month) => {
             return month.totalSpent > highest.totalSpent ? month : highest;
         }, validMonths[0])
         : null;
 
+    // Lowest spending month
     const lowestMonth = hasValidMonths
         ? validMonths.reduce((lowest, month) => {
             return month.totalSpent < lowest.totalSpent ? month : lowest;
         }, validMonths[0])
         : null;
 
+    // Average monthly spending
     const averageMonthlySpending = hasValidMonths
         ? validMonths.reduce((sum, month) => sum + month.totalSpent, 0) /
         validMonths.length

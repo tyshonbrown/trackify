@@ -25,6 +25,7 @@ const Dashboard = () => {
 
   const today = new Date();
 
+  // Fetch name of user for Greetings
   const fetchName = async () => {
     const { data, error } = await supabase
       .from("profiles")
@@ -39,6 +40,7 @@ const Dashboard = () => {
     setFirstName(data.first_name);
   }
 
+  // Fetch total budget
   const fetchTotalBudget = async () => {
     const { data, error } = await supabase
       .from("budget")
@@ -52,6 +54,7 @@ const Dashboard = () => {
     setTotalBudget(Number(data?.total_budget) || 0);
   };
 
+  // Fetch income
   const fetchIncome = async () => {
     const { data, error } = await supabase
       .from("budget")
@@ -65,6 +68,7 @@ const Dashboard = () => {
     setIncome(Number(data?.income) || 0);
   }
 
+  // Fetch expenses
   const fetchExpenses = async () => {
     const { data, error } = await supabase
       .from("expense")
@@ -77,6 +81,7 @@ const Dashboard = () => {
     setExpenses(data);
   }
 
+  // Fetch categories for Spending by Category Pie Chart
   const fetchCategories = async () => {
     const { data, error } = await supabase
       .from("expense_categories")
@@ -90,6 +95,7 @@ const Dashboard = () => {
     setCategories(data);
   };
 
+  // Expenses for recent expenses
   const fetchRecentExpenses = async () => {
     const { data, error } = await supabase
       .from("expense")
@@ -104,6 +110,7 @@ const Dashboard = () => {
     setRecentExpenses(data);
   }
 
+  // Fetch extra income
   const fetchExtraIncome = async () => {
     const today = new Date();
 
@@ -141,6 +148,7 @@ const Dashboard = () => {
     fetchTotalBudget();
   }, []);
 
+  // Save Expenses when adding new
   const handleSaveExpense = async (newExpense) => {
     const { error: saveExpenseError } = await supabase
       .from("expense")
@@ -163,6 +171,7 @@ const Dashboard = () => {
 
   };
 
+  // Save extra income when added
   const handleSaveExtraIncome = async (newIncome) => {
     const { error: saveIncomeError } = await supabase
       .from("extra_income")
@@ -225,12 +234,12 @@ const Dashboard = () => {
     <div className="flex flex-col items-center md:items-start space-y-4 p-4 bg-black">
       <h1 className="text-4xl md:text-5xl font-thin">DASHBOARD</h1>
 
-      {/* *******CHANGE Tyshon to USERS NAME ******************/}
+      {/* Greetings */}
       <h1 className="text-xl font-light italic opacity-50">
         Greetings {firstName}!
       </h1>
 
-      {/* Income and Spending summary ----------------------------------------------------------*/}
+      {/* Income and Spending summary */}
       <div className="w-full flex flex-col md:flex-row items-center justify-between space-x-4 border-t border-t-gray-900 border-b border-gray-900">
         {/* This months income */}
         <div className="flex-1 text-center py-4">
@@ -253,11 +262,13 @@ const Dashboard = () => {
               / ${totalBudget.toFixed(2)} budget
             </span>
           </p>
+          {/* This Weeks spending */}
           <p className="text-sm italic">${thisWeekSpending.toFixed(2)} spent this week (Sun-Sat)</p>
         </div>
       </div>
 
       <div className="w-full flex flex-col-reverse md:flex-row gap-4">
+        {/* Show 7 most recent expenses */}
         <div className="flex-1 border border-gray-600 rounded bg-gray-500/15 p-4 md:h-80 md:flex md:flex-col">
           <div className="flex justify-between items-center pb-2">
             <h2 className="text-lg font-semibold">Recent Expenses</h2>
@@ -297,7 +308,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Quick Actions ----------------------------------------------------------*/}
+        {/* Quick Actions */}
         <div
           className="flex-1 border border-gray-600 rounded bg-gray-500/15 p-4
                 flex flex-col items-center"
@@ -336,7 +347,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Spending By Category ----------------------------------------------------------------*/}
+      {/* Spending By Category Pie Chart */}
       <div className="w-full border border-gray-600 rounded bg-gray-500/15 p-4 mt-6">
         <div className="min-h-[28rem] flex items-center justify-center">
           <SpendingByCategory
@@ -348,6 +359,7 @@ const Dashboard = () => {
         </div>
       </div>
 
+      {/* Add new expense form */}
       {showAddExpense && (
         <AddExpense
           onClose={() => setShowAddExpense(false)}
@@ -355,6 +367,7 @@ const Dashboard = () => {
         />
       )}
 
+      {/* Add extra income form */}
       {showAddExtraIncome && (
         <AddExtraIncome
           onClose={() => setShowAddExtraIncome(false)}

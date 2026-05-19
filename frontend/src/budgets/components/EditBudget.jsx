@@ -4,16 +4,16 @@ import { supabase } from '@/supabaseClient';
 
 const EditBudget = ({ section, budget, onClose, onSave }) => {
 
-    const [formData, setFormData] = useState({});
+    const [form, setForm] = useState({});
 
     // if section or budget changed, the inside function runs
     useEffect(() => {
         if (!section || !budget) return;
 
-        // Depending on the section, the formData is set with the actual values extracted from the budget table
+        // Depending on the section, the form is set with the actual values extracted from the budget table
         switch (section) {
             case "Housing":
-                setFormData({
+                setForm({
                     housing: budget.housing,
                     housing_insurance: budget.housing_insurance,
                     utilities: budget.utilities,
@@ -21,7 +21,7 @@ const EditBudget = ({ section, budget, onClose, onSave }) => {
                 break;
 
             case "Transportation":
-                setFormData({
+                setForm({
                     car_payment: budget.car_payment,
                     car_insurance: budget.car_insurance,
                     fuel: budget.fuel,
@@ -30,14 +30,14 @@ const EditBudget = ({ section, budget, onClose, onSave }) => {
                 break;
 
             case "Phone":
-                setFormData({
+                setForm({
                     mobile: budget.mobile,
                     internet: budget.internet,
                 });
                 break;
 
             case "Loans":
-                setFormData({
+                setForm({
                     credit_cards: budget.credit_cards,
                     student_loans: budget.student_loans,
                     personal_loans: budget.personal_loans,
@@ -45,7 +45,7 @@ const EditBudget = ({ section, budget, onClose, onSave }) => {
                 break;
 
             case "Subscriptions":
-                setFormData({
+                setForm({
                     subscriptions_entertainment: budget.subscriptions_entertainment,
                     subscriptions_health: budget.subscriptions_health,
                     subscriptions_app: budget.subscriptions_app,
@@ -53,7 +53,7 @@ const EditBudget = ({ section, budget, onClose, onSave }) => {
                 break;
 
             case "spending-budgets":
-                setFormData({
+                setForm({
                     groceries: budget.groceries,
                     eating_out: budget.eating_out,
                     entertainment: budget.entertainment,
@@ -63,7 +63,7 @@ const EditBudget = ({ section, budget, onClose, onSave }) => {
                 break;
 
             case "income":
-                setFormData({
+                setForm({
                     income: budget.income,
                 });
                 break;
@@ -74,19 +74,19 @@ const EditBudget = ({ section, budget, onClose, onSave }) => {
         }
     }, [section, budget]);
 
-    // Updating formData when a user changes the pre-filled value
+    // Updating form when input values change
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData((prev) => ({
+        setForm((prev) => ({
             ...prev,
             [name]: value === "" ? "" : Number(value),
         }));
     };
 
-    // Update budget table with formData when a user saves their changes
+    // Update budget table with form when a user saves their changes
     const handleSave = async () => {
         const cleanedFormData = Object.fromEntries(
-            Object.entries(formData).map(([key, value]) => [
+            Object.entries(form).map(([key, value]) => [
                 key,
                 value === "" || value == null ? 0 : Number(value),
             ])
@@ -131,7 +131,7 @@ const EditBudget = ({ section, budget, onClose, onSave }) => {
             0
         );
 
-        // Update current budget table
+        // Update budget
         const { error: updateError } = await supabase
             .from("budget")
             .update({
@@ -145,7 +145,7 @@ const EditBudget = ({ section, budget, onClose, onSave }) => {
             return;
         }
 
-        // Save full monthly snapshot
+        // Save full monthly snapshot into budget history table
         const { error: historyError } = await supabase
             .from("budget_history")
             .upsert(
@@ -200,9 +200,9 @@ const EditBudget = ({ section, budget, onClose, onSave }) => {
                     Edit {section.replace("-", " ")}
                 </h2>
 
-                {/* Map through formData, setting labels and corresponding values */}
+                {/* Map through form, setting labels and corresponding values */}
                 <div className="space-y-4">
-                    {Object.keys(formData).map((key) => (
+                    {Object.keys(form).map((key) => (
                         <div key={key}>
                             <label className="text-sm text-zinc-400 capitalize">
                                 {key.replace("_", " ")}
@@ -210,7 +210,7 @@ const EditBudget = ({ section, budget, onClose, onSave }) => {
                             <input
                                 type="number"
                                 name={key}
-                                value={formData[key] ?? ""}
+                                value={form[key] ?? ""}
                                 onChange={handleChange}
                                 className="w-full mt-1 p-2 bg-black border border-zinc-700 rounded"
                             />

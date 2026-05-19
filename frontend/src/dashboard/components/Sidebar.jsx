@@ -8,6 +8,7 @@ const Sidebar = ({ onClose }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  // Profile Picture for Sidebar
   const [profilePicUrl, setProfilePicUrl] = useState("");
 
   useEffect(() => {
@@ -42,6 +43,7 @@ const Sidebar = ({ onClose }) => {
     setProfilePicUrl(data?.profile_pic_url || "");
   };
 
+  // Sign Out
   const handleSignOut = async () => {
     const {
       data: { user },
@@ -53,6 +55,7 @@ const Sidebar = ({ onClose }) => {
       return;
     }
 
+    // Check is user was a Demo user
     if (user?.is_anonymous) {
 
       // Delete demo user's expenses
@@ -119,9 +122,11 @@ const Sidebar = ({ onClose }) => {
       return;
     }
 
+    // Go to Landing Page
     navigate("/");
   };
 
+  // Sidebar Items and Icons
   const navItems = [
     { to: "/layout-dash/dashboard", icon: "bxs-dashboard", label: "Dashboard" },
     {
@@ -154,13 +159,14 @@ const Sidebar = ({ onClose }) => {
       className="h-full w-60 bg-gray-900/40 backdrop-blur-xl border-r border-gray-800 
       flex flex-col shadow-xl"
     >
-      {/* Top section with close button + logo */}
+      {/* Top section with close button and logo */}
       <div className="flex items-center p-6 border-b border-gray-800">
         <button onClick={onClose} className="text-2xl p-3 transition md:hidden">
           <i className="bx bx-menu"></i>
         </button>
         <LogoDash />
       </div>
+
       {/* Navigation Links*/}
       <nav className="flex-1 mt-2 px-3 space-y-2 ">
         {navItems.map((item) => {
@@ -181,7 +187,7 @@ const Sidebar = ({ onClose }) => {
         })}
       </nav>
 
-      {/* Account section — desktop only */}
+      {/* Account section for desktop only */}
       <Link
         to="/layout-dash/account"
         onClick={onClose}
@@ -198,6 +204,7 @@ const Sidebar = ({ onClose }) => {
       </Link>
 
 
+      {/* Signout */}
       <div className="p-5 border-t border-gray-800">
         <button
           onClick={handleSignOut}

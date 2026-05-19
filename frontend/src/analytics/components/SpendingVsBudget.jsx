@@ -20,10 +20,12 @@ const SpendingVsBudget = ({ expenses, categories, budgetByGroup }) => {
         }
     });
 
+    // Lookup connecting category_id to its budget group
     const categoryIdToBudgetGroup = Object.fromEntries(
         categories.map((category) => [category.id, category.budget_group])
     );
 
+    // Add each expenses amount to its corresponding budget group
     expenses.forEach((expense) => {
         const budgetGroupName = categoryIdToBudgetGroup[expense.category_id];
 
@@ -32,15 +34,17 @@ const SpendingVsBudget = ({ expenses, categories, budgetByGroup }) => {
         }
     });
 
+    // Conver budget group object into an array
+    // Sort the groups so the ones with spending values come first
     const budgetGroupArray = Object.values(budget_groups).sort((a, b) => {
         const aHasAmount = a.spent > 0;
         const bHasAmount = b.spent > 0;
-      
+
         if (aHasAmount && !bHasAmount) return -1;
         if (!aHasAmount && bHasAmount) return 1;
-      
+
         return b.spent - a.spent;
-      });
+    });
 
     return (
         <div className="flex flex-col items-center w-full h-full">

@@ -7,15 +7,18 @@ import MonthlySpending from "../components/MonthlySpending";
 
 const Analytics = () => {
   const today = new Date();
-  const [selectedMonth, setSelectedMonth] = useState(null);
+  
+  // Stores the year and month that is being viewed by the user
   const [viewYear, setViewYear] = useState(today.getFullYear());
   const [viewMonth, setViewMonth] = useState(today.getMonth());
+
   const [spendingYear, setSpendingYear] = useState(today.getFullYear());
 
   const [categories, setCategories] = useState([]);
   const [expenses, setExpenses] = useState([]);
   const [budget, setBudget] = useState({});
 
+  // Fetch Categories
   const fetchCategories = async () => {
     const { data, error } = await supabase
       .from("expense_categories")
@@ -29,6 +32,7 @@ const Analytics = () => {
     setCategories(data);
   };
 
+  // Fetch Expenses
   const fetchExpenses = async () => {
     const { data, error } = await supabase
       .from("expense")
@@ -42,6 +46,7 @@ const Analytics = () => {
     setExpenses(data);
   };
 
+  // Fetch Budget for Month being viewed
   const fetchBudgetForViewedMonth = async () => {
     const {
       data: { user },
@@ -82,23 +87,22 @@ const Analytics = () => {
     fetchExpenses();
   }, []);
 
+  // Whenever the view year or month change, fetch the budget for that month and year
   useEffect(() => {
     fetchBudgetForViewedMonth();
   }, [viewYear, viewMonth]);
 
-  // Holds onto the current month and year, NEVER CHANGES
+  // Holds onto the current month and year
   const currentYear = today.getFullYear();
   const currentMonth = today.getMonth();
 
-  // Year Navigation for Monthly Spending --------------------------------------------------
+  // Year Navigation for Monthly Spending
   const goToCurrentYear = () => {
     setSpendingYear(currentYear);
   };
-
   const previousYear = () => {
     setSpendingYear(spendingYear - 1);
   };
-
   const nextYear = () => {
     // Cannot view future years
     if (spendingYear === currentYear) {
@@ -108,6 +112,7 @@ const Analytics = () => {
     setSpendingYear(spendingYear + 1);
   };
 
+  // Check if year being viewed is current
   const isAtCurrentYear = spendingYear === currentYear;
 
   const monthlySpendingData = Array.from({ length: 12 }, (_, index) => {
@@ -120,6 +125,7 @@ const Analytics = () => {
       );
     });
 
+    // Sum monthly epenses
     const totalSpent = monthExpenses.reduce(
       (sum, expense) => sum + Number(expense.amount),
       0
@@ -133,7 +139,7 @@ const Analytics = () => {
     };
   });
 
-  // Month Navigation ---------------------------------------------------------------------
+  // Month Navigation
   const goToCurrentMonth = () => {
     setViewYear(currentYear);
     setViewMonth(currentMonth);
@@ -158,7 +164,6 @@ const Analytics = () => {
       setViewMonth(viewMonth + 1);
     }
   };
-
 
   // Check if month being viewed is Current
   const isAtCurrentMonth = viewYear === currentYear && viewMonth === currentMonth;
@@ -185,6 +190,7 @@ const Analytics = () => {
   const viewedMonthSpending = viewedMonthExpenses
     .reduce((sum, expense) => sum + Number(expense.amount), 0);
 
+  // Total budgets by budget group
   const budgetByGroup = {
     "Housing":
       Number(budget.housing || 0) +
@@ -273,6 +279,8 @@ const Analytics = () => {
 
           {/* First Two Trends (Based on Month) */}
           <div className="flex flex-col lg:flex-row mt-4 gap-2 h-auto lg:h-[28rem] w-full">
+
+            {/* Spending by Category Pie Chart */}
             <div className="w-full lg:w-1/2 text-center bg-slate-800 rounded-lg p-3">
               <SpendingByCategory
                 expenses={viewedMonthExpenses}
@@ -282,6 +290,7 @@ const Analytics = () => {
               />
             </div>
 
+            {/* Spending vs Budget Progress Bars */}
             <div className="w-full lg:w-1/2 text-center bg-yellow-700/80 rounded-lg p-3">
               <SpendingVsBudget
                 expenses={viewedMonthExpenses}
@@ -316,6 +325,7 @@ const Analytics = () => {
               </button>
             </div>
 
+            {/* Back to current year button */}
             <div className="h-10 flex items-center justify-center">
               {!isAtCurrentYear && (
                 <button

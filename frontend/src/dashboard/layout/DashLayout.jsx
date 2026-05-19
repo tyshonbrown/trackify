@@ -1,13 +1,49 @@
 import React from "react";
 import Sidebar from "@/dashboard/components/Sidebar";
-import { Outlet } from "react-router-dom";
-import { useState } from "react";
-import { useEffect } from "react";
+import { Link, Outlet } from "react-router-dom";
+import { useEffect, useState } from "react";
 import LogoDash from "@/dashboard/components/LogoDash";
+import { supabase } from "@/supabaseClient";
 
 const DashLayout = () => {
+
+  // Sidebar for smaller windows
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
+
+  const [profilePicUrl, setProfilePicUrl] = useState("");
+
+  const getProfilePic = async () => {
+    const {
+      data: { user },
+      error: userError,
+    } = await supabase.auth.getUser();
+
+    if (userError || !user) return;
+
+    const { data, error } = await supabase
+      .from("profiles")
+      .select("profile_pic_url")
+      .eq("id", user.id)
+      .single();
+
+    if (error) {
+      console.error("Error fetching profile pic:", error.message);
+      return;
+    }
+
+    setProfilePicUrl(data?.profile_pic_url || "");
+  };
+
+  useEffect(() => {
+    getProfilePic();
+
+    window.addEventListener("profilePicUpdated", getProfilePic);
+
+    return () => {
+      window.removeEventListener("profilePicUpdated", getProfilePic);
+    };
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -58,15 +94,19 @@ const DashLayout = () => {
             </div>
           </div>
 
-          {/* Account*/}
-          <div className="flex flex-col items-center gap-1 pr-4">
+          {/* Account */}
+          <Link
+            to="/layout-dash/account"
+            className="flex flex-col items-center gap-1 pr-4 text-gray-300 hover:text-white transition"
+          >
             <img
-              src="/profile.jpg"
+              src={profilePicUrl || "/profile.jpg"}
               alt="User"
-              className="w-14 h-14 rounded-full border border-gray-700"
+              className="w-14 h-14 rounded-full object-cover border border-gray-700"
             />
-            <span>Account</span>
-          </div>
+
+            <span className="text-sm">Account</span>
+          </Link>
         </header>
 
         {/* Page content */}

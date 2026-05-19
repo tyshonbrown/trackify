@@ -102,6 +102,7 @@ const Account = () => {
         e.target.value = "";
     };
 
+    // Update Users name
     const handleSaveName = async () => {
         if (!user) return;
 
@@ -146,6 +147,7 @@ const Account = () => {
         setSavingName(false);
     };
 
+    // Change Password
     const handleChangePassword = async () => {
         if (!currentPassword || !newPassword || !confirmPassword) {
             alert("Fill in all password fields.");
@@ -196,9 +198,6 @@ const Account = () => {
         alert("Password updated successfully.");
     }
 
-
-
-
     return (
         <div className="flex flex-col items-center space-y-4 p-4 bg-black">
 
@@ -207,6 +206,7 @@ const Account = () => {
                 <h1 className="text-4xl md:text-5xl font-thin mb-2">ACCOUNT</h1>
             </div>
 
+            {/* Profile Picture */}
             <div className="bg-gray-900/40 border border-gray-800 rounded-xl px-6 py-8 max-w-md">
                 <div className="flex flex-col items-center gap-4">
                     <img
@@ -287,6 +287,7 @@ const Account = () => {
                 )}
             </div>
 
+            {/* Email */}
             <div className="pt-5">
                 <div className="flex justify-between items-center mb-3">
                     <h2 className="text-xl font-thin">Email</h2>
@@ -305,7 +306,7 @@ const Account = () => {
                 </p>
             </div>
 
-            {/* Password section */}
+            {/* Password */}
             <div className=" pt-5">
                 <div className="flex justify-between items-center mb-3">
                     <h2 className="text-xl font-thin px-6">Password</h2>

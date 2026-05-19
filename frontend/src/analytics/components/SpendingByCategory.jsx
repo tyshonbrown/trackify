@@ -13,8 +13,6 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 const SpendingByCategory = ({ expenses, totalSpending, categories, type }) => {
     const isSmallScreen = window.innerWidth < 640;
 
-    
-
     // Expenses hold category_id NOT name
     // Categories here are gonna be budget_group
 
@@ -55,6 +53,7 @@ const SpendingByCategory = ({ expenses, totalSpending, categories, type }) => {
         }))
         .sort((a, b) => b.total - a.total);
 
+    // Pie Chart data
     const chartData = {
         labels: spendingByCategoryData.map((item) => item.category),
         datasets: [
@@ -80,6 +79,7 @@ const SpendingByCategory = ({ expenses, totalSpending, categories, type }) => {
         ],
     };
 
+    // Pie Chart Options
     const options = {
         responsive: true,
         maintainAspectRatio: false,

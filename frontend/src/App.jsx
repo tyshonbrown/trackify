@@ -21,7 +21,7 @@ import Analytics from "./analytics/pages/Analytics";
 import Budgets from "./budgets/pages/Budgets";
 import DashLayout from "./dashboard/layout/DashLayout";
 import NewTrip from "./trips/components/NewTrip";
-import Calc from "./dashboard/pages/Calc";
+import Calc from "./calculator/Calc";
 import BudgetSetup from "./onboarding/BudgetSetup";
 import ProfilePictureSetup from "./onboarding/ProfilePictureSetup";
 

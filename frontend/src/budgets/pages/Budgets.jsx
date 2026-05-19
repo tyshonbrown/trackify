@@ -17,6 +17,7 @@ const Budgets = () => {
   const [selectedExtraIncome, setSelectedExtraIncome] = useState(null);
   const [showEditExtraIncome, setShowEditExtraIncome] = useState(false);
 
+  // Fetch the Budgets
   const fetchBudgets = async () => {
     const { data, error } = await supabase
       .from("budget")
@@ -31,9 +32,11 @@ const Budgets = () => {
     setBudget(data);
   };
 
+  // Fetch extra income
   const fetchExtraIncome = async () => {
     const today = new Date();
 
+    // Get extra income only for the current month
     const firstDay = new Date(today.getFullYear(), today.getMonth(), 1)
       .toISOString()
       .split("T")[0];
@@ -64,12 +67,13 @@ const Budgets = () => {
     fetchExtraIncome();
   }, []);
 
-
+  // Edit extra incoem
   const handleEditClick = (extraIncome) => {
     setSelectedExtraIncome(extraIncome);
     setShowEditExtraIncome(true);
   };
 
+  // Delete Extra income
   const handleDeleteClick = async (extraIncome) => {
     const confirm = window.confirm(
       `Are you sure you want to delete extra income from: "${extraIncome.name}"? This cannot be undone.`
@@ -104,13 +108,14 @@ const Budgets = () => {
         <h1 className="text-4xl md:text-5xl font-thin mb-2">BUDGETS</h1>
       </div>
 
-      {/* Income ------------------------------------------------------------- */}
+      {/* Income */}
       <div className="w-full pb-8">
         <div onClick={() => setOpenSection("")}>
           <h2 className="text-2xl text-gray-400">Income</h2>
           <p className="italic font-thin text-sm"></p>
         </div>
 
+        {/* Monthly Income */}
         <DisplayIncome
           title="Monthly Income"
           description="Recurring income received each month"
@@ -122,6 +127,7 @@ const Budgets = () => {
           </div>
         </DisplayIncome>
 
+        {/* Extra Income */}
         <DisplayIncome
           title="Extra Income"
           description="One-time income added for the current month"
@@ -155,13 +161,13 @@ const Budgets = () => {
                       <p className="text-green-400 group-hover:hidden">${Number(item.amount).toFixed(2)}</p>
 
                       <div className="space-x-2">
-                        {/* Edit Button on hover */}
+                        {/* Edit extra incoem Button on hover */}
                         <button onClick={() => handleEditClick(item)}
                           className="hidden group-hover:inline-block text-lg text-yellow-400 hover:text-yellow-200">
                           <i className="bx bxs-pencil" />
                         </button>
 
-                        {/* Delete Button on hover */}
+                        {/* Delete extra income Button on hover */}
                         <button onClick={() => handleDeleteClick(item)}
                           className="hidden group-hover:inline-block text-lg text-red-400 hover:text-red-200">
                           <i className="bx bxs-trash" />
@@ -179,13 +185,14 @@ const Budgets = () => {
 
       </div>
 
-      {/* Monthly Bills ------------------------------------------------------------- */}
+      {/* Monthly Bills */}
       <div className="w-full pb-8">
         <div onClick={() => setOpenSection("")}>
           <h2 className="text-2xl text-gray-400">Monthly Bills</h2>
           <p className="italic font-thin text-sm">Regular payments you don't want to miss.</p>
         </div>
 
+        {/* Housing */}
         <DisplayBills
           title="Housing"
           description="Rent/Mortgage, Insurance, Utilities"
@@ -214,6 +221,7 @@ const Budgets = () => {
           </div>
         </DisplayBills>
 
+        {/* Transportation */}
         <DisplayBills
           title="Transportation"
           description="Car Loan/Lease, Insurance, Fuel, Public Transportation"
@@ -247,6 +255,7 @@ const Budgets = () => {
           </div>
         </DisplayBills>
 
+        {/* Mobile and Internet */}
         <DisplayBills
           title="Mobile & Internet"
           description="Phone Plans & Device Payments, Home Internet"
@@ -270,6 +279,7 @@ const Budgets = () => {
           </div>
         </DisplayBills>
 
+        {/* Loans and Credit */}
         <DisplayBills
           title="Loans & Credit"
           description="Credit Cards, Student & Personal Loans"
@@ -298,6 +308,7 @@ const Budgets = () => {
           </div>
         </DisplayBills>
 
+        {/* Subscriptions */}
         <DisplayBills
           title="Subscriptions"
           description="Entertainment, Health, & App Subscriptions"
@@ -327,7 +338,7 @@ const Budgets = () => {
         </DisplayBills>
       </div>
 
-      {/* Spending Budgets ------------------------------------------------------------- */}
+      {/* Spending Budgets */}
       <div onClick={() => setOpenSection("")} className="w-full">
         <div>
           <div className="flex items-center justify-between">
@@ -379,7 +390,7 @@ const Budgets = () => {
           </DisplayBudgets>
         </div>
 
-        {/* When edit section is set and not null, the Edit modal opens */}
+        {/* Edit Budget Form */}
         {editSection && (
           <EditBudget
             section={editSection}
@@ -389,6 +400,7 @@ const Budgets = () => {
           />
         )}
 
+        {/* Edit extra income form */}
         {showEditExtraIncome && (
           <EditExtraIncome
             extraIncome={selectedExtraIncome}

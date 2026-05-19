@@ -1,14 +1,14 @@
 import React from "react";
 
+// Reusable button component for the Calculator
 const Keys = ({ label, keyClass, onButtonClick }) => {
   const equalClass =
     "col-[span_2] bg-[#4ccda1] text-[#1a261a] font-semibold hover:bg-[#4CCDC6]";
 
   return (
     <div
-      className={`bg-[#141414] flex cursor-pointer items-center justify-center p-4 rounded-[5px] hover:bg-[#4ccdc742] ${
-        keyClass && equalClass
-      }`}
+      className={`bg-[#141414] flex cursor-pointer items-center justify-center p-4 rounded-[5px] hover:bg-[#4ccdc742] ${keyClass && equalClass
+        }`}
       onClick={() => onButtonClick(label)}
     >
       {label}

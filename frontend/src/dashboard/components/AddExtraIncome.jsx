@@ -9,6 +9,7 @@ const AddExtraIncome = ({ onClose, onSave }) => {
 
     });
 
+    // Update form when input values change
     const handleChange = (e) => {
         const { name, value } = e.target;
 
@@ -18,6 +19,7 @@ const AddExtraIncome = ({ onClose, onSave }) => {
         }));
     };
 
+    // Submit
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -43,6 +45,8 @@ const AddExtraIncome = ({ onClose, onSave }) => {
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
             <div className="bg-zinc-900 rounded-lg p-6 w-full max-w-md">
+
+                {/* Title */}
                 <h2 className="text-xl mb-4 capitalize">
                     Add Extra Income
                 </h2>
