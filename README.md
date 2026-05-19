@@ -74,8 +74,47 @@ While building Trackify, I practiced:
 - Add email reminders for budget limits
 - Expand analytics with more spending trends and insights
 
+## Live Demo
+
+Trackify will be available here once deployed:
+
+[View Live Site](site-url)
+
 ## Installation
 
 Clone the repository:
 
 ```bash
+git clone https://github.com/tyshonbrown/trackify.git
+```
+
+Go into the frontend folder:
+
+```bash
+cd Trackify/frontend
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+## Environment Variables
+
+To run this project locally, create a `.env` file in the `frontend` folder and add:
+
+```env
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+## Author
+
+Tyshon Brown
