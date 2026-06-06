@@ -1,5 +1,5 @@
 import { supabase } from "@/supabaseClient";
-import React, { act } from "react";
+import React from "react";
 import { useState, useEffect } from "react";
 import Categories from "@/expenses/components/Categories";
 import AddExpense from "@/expenses/components/AddExpense";
@@ -234,16 +234,6 @@ const Expenses = () => {
       })
       .reduce((sum, expense) => sum + Number(expense.amount), 0);
 
-  // Month Expense Amount -----------------------------------------------------------
-  const startOfThisMonth = new Date(currentYear, currentMonth, 1);
-  const startOfTomorrow = new Date(currentYear, currentMonth, today.getDate() + 1);
-
-  const thisMonthSpending = expenses
-    .filter((expense) => {
-      const d = new Date(expense.date + "T00:00:00");
-      return d >= startOfThisMonth && d < startOfTomorrow;
-    })
-    .reduce((sum, expense) => sum + Number(expense.amount), 0);
 
   // Expense Filtering -------------------------------------------------------------
   // To get the range between start and end of the month being viewed

@@ -30,24 +30,31 @@ Trackify is a full-stack expense tracking web app that helps users manage their 
 ## Screenshots
 
 ### Landing Page
+
 ![Landing Page](./screenshots/Landing-Page.png)
 
 ### Dashboard
+
 ![Dashboard](./screenshots/Dashboard.png)
 
 ### Expenses
+
 ![Expenses](./screenshots/Expenses.png)
 
 ### Budgets
+
 ![Budgets](./screenshots/Budgets.png)
 
 ### Trips
+
 ![Trips](./screenshots/Trips-Page.png)
 
 ### Analytics
+
 ![Analytics](./screenshots/Analytics.png)
 
 ### Account
+
 ![Account](./screenshots/Account.png)
 
 ## Demo
