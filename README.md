@@ -27,7 +27,7 @@ Trackify is a full-stack expense tracking web app that helps users manage their 
 - Chart.js
 - Recharts
 
-## Screenshots
+## Pages
 
 ### Landing Page
 
