@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import {
     Chart as ChartJS,
     ArcElement,
@@ -6,7 +5,6 @@ import {
     Legend,
 } from "chart.js";
 import { Doughnut } from 'react-chartjs-2';
-import { supabase } from '@/supabaseClient';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 

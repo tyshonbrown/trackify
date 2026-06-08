@@ -222,7 +222,7 @@ const getTargetSpentForCategory = (
   return Number((budgetAmount * percent).toFixed(2));
 };
 
-// Take the total monthly spending amoutn and plits it into many expenses
+// Take the total monthly spending amount and splits it into many expenses
 const splitAmount = (total, count, rand) => {
 
   // If no expenses to create or total given is 0, return an empty array

@@ -19,7 +19,7 @@ const Login = () => {
     setError(null);
 
     // Attempt sign in with email and password
-    const { data, error } = await supabase.auth.signInWithPassword({
+    const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });

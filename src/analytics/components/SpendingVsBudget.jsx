@@ -5,7 +5,7 @@ const SpendingVsBudget = ({ expenses, categories, budgetByGroup }) => {
 
     const budget_groups = {};
 
-    // For every category, look at its budget_group, it that roup DNE in the object yet, create it
+    // For every category, look at its budget_group, if that group DNE in the object yet, create it
     categories.forEach((category) => {
         const groupName = category.budget_group;
 

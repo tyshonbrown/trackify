@@ -2,10 +2,11 @@ import React from "react";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { seedDemoUserData } from "@/utils/seedDemoUserData";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Signup from "./Signup";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
+import { supabase } from "@/supabaseClient";
 
 const Landing = () => {
 
