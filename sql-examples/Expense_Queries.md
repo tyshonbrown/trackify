@@ -71,7 +71,7 @@ FROM expense;
 ## 6. Get the number of user expenses that are NOT connected to a trip
 
 ```sql
-SELECT COUNT(expense.id) AS
+SELECT COUNT(*) AS
 FROM expense
 WHERE expense.trip_id IS NULL;
 ```
