@@ -54,8 +54,24 @@ SET amount = 100.20
 WHERE id = 'EXPENSE_ID';
 ```
 
-## 4. Delete an expense from the expense tbale
+## 4. Delete an expense from the expense table
+
 ```sql
 DELETE FROM expense
 WHERE id = 'EXPENSE_ID';
+```
+
+## 5. Get 5 most recent expenses of a user
+
+```sql
+SELECT TOP 5 *
+FROM expense;
+```
+
+## 6. Get the number of user expenses that are NOT connected to a trip
+
+```sql
+SELECT COUNT(expense.id) AS
+FROM expense
+WHERE expense.trip_id IS NULL;
 ```
