@@ -101,7 +101,7 @@ While building Trackify, I practiced:
 
 ## Live Demo
 
-Trackify will be available here once deployed:
+Visit Trackify here:
 
 [View Live Site](https://trackify-chi-seven.vercel.app/)
 
