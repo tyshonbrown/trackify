@@ -103,7 +103,7 @@ While building Trackify, I practiced:
 
 Trackify will be available here once deployed:
 
-[View Live Site](site-url)
+[View Live Site](https://trackify-chi-seven.vercel.app/)
 
 ## Installation
 
